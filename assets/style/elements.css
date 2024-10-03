@@ -1,0 +1,205 @@
+@import "./variables.css";
+
+work-card img {
+    width: 100%;
+}
+
+work-card figure {
+    flex: 1;
+}
+
+work-list div {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-column-gap: 20px;
+    grid-row-gap: 20px;
+}
+
+work-editor section {
+    position: fixed;
+    top: 0;
+    left: 0;
+    margin: 0;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 30%);
+    z-index: 1;
+}
+
+work-editor .work-editor-container {
+    padding: 25px;
+    background-color: white;
+    border-radius: 10px;
+    width: 630px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    z-index: 2;
+}
+
+work-editor .work-editor-header {
+    width: 100%;
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+}
+
+work-editor .work-editor-header button {
+    background: none;
+    border: none;
+    width: fit-content;
+    align-items: center;
+    cursor: pointer;
+}
+
+work-editor h3 {
+    text-align: center;
+}
+
+work-editor #workEditorSwitchToAddWorkButton {
+    padding: 10px 40px;
+    width: fit-content;
+    font-family: 'Syne';
+	font-weight: 700;
+	color: white;
+	background-color: var(--primary-color);
+	margin : 2em auto ;
+	text-align: center;
+	border: none;
+	border-radius: 60px ;
+    cursor: pointer;
+}
+
+work-editor .work-editor-delete-content {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    row-gap: 10px;
+    column-gap: 20px;
+    width: 100%;
+}
+
+work-editor .work-editor-delete-item {
+    flex: 1;
+    position: relative;
+}
+
+work-editor .work-editor-delete-item > img {
+    width: 100%;
+}
+
+work-editor .work-editor-delete-item  button {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background-color: black;
+    border: none;
+    width: 17px;
+    height: 17px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 2px;
+}
+
+work-editor .work-editor-create-content {
+    margin: 0 2rem;
+}
+
+work-editor .work-editor-create-fields {
+    display: flex;
+    flex-direction: column;
+}
+
+filter-button button {
+    border: solid 1px var(--primary-color);
+    color: var(--primary-color);
+    background: none;
+    border-radius: 60px;
+    padding: 10px 21px;
+    font-size: 16px;
+    font-family: 'Work Sans';
+    font-weight: 700;
+    text-align: center;
+}
+
+filter-button[active="true"] button {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+edition-banner div {
+    background-color: black;
+    color: white;
+    display: flex;
+    padding: 10px;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+}
+
+file-preview .file-preview-input {
+    visibility: hidden;
+    position: absolute;
+}
+
+file-preview .file-preview {
+    display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 20px;
+	padding: 25px;
+	background-color: #E8F1F6;
+	color: #444444;
+}
+
+file-preview .file-preview button {
+    color: #306685;
+	background-color: #CBD6DC;
+	border-color: #CBD6DC;
+    font-family: 'Syne';
+	font-weight: 700;
+	color: white;
+    padding: 0.75rem 1rem;
+	text-align: center;
+	border: none;
+	border-radius: 60px;
+    cursor: pointer;
+}
+
+file-preview .file-preview-image {
+    height: 203px;
+}
+
+error-popup .error-modal-container {
+    position: fixed;
+    z-index: 4;
+    top: 20px;
+    right: 20px;
+}
+
+error-popup .error-modal-element {
+    position: relative;
+    padding: 20px;
+    width: 250px;
+    background-color: #f3160e;
+    color: white;
+    font-weight: 600;
+    border-radius: 5px;
+}
+
+error-popup .error-modal-close-btn {
+    position: absolute;
+    top: 5px;
+    right: 6px;
+    z-index: 5;
+    cursor: pointer;
+}
+
+.no-padding {
+	padding: 0 !important;
+}
