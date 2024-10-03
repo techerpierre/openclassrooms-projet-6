@@ -172,9 +172,14 @@ export class WorkEditor extends HTMLElement {
                 <label htmlFor="title">Titre</label>
                 <input type="text" id="title" name="title"/>
                 <label htmlFor="category">Catégorie</label>
-                <input type="text" id="category" name="category"/>
-                <span></span>
-                <input type="submit" value="Valider"/>
+                <input type="text" id="category" name="category" list="suggestions" autocomplete="off"/>
+                <datalist id="suggestions">
+                    ${this.categories ? this.categories.map(category => /*html*/`
+                        <option value="${category.name}"></option>
+                    `).join("") : ""}
+                </datalist>
+                <div class="separator"></div>
+                <input type="submit" value="Valider" class="create-work-form-btn disabled"/>
             <div>
         </form>
         `
@@ -211,8 +216,8 @@ export class WorkEditor extends HTMLElement {
     }
 
     setCreateEvents() {
-        const switchToDeleteButton = this.querySelector("#workEditorSwitchToDeleteWork");
-        const createNewWorkForm = this.querySelector("#createNewWorkForm");
+        const switchToDeleteButton = this.querySelector("#workEditorSwitchToDeleteWork")
+        const createNewWorkForm = this.querySelector("#createNewWorkForm")
         const errorPopup = document.getElementById("errorPopup")
 
         switchToDeleteButton.addEventListener("click", () => {
@@ -231,7 +236,13 @@ export class WorkEditor extends HTMLElement {
                 return
             }
 
-            const categoryId = this.categories.find(el => el.name.toLowerCase() === category.toLowerCase()).id
+            const selectedCategory = this.categories.find(el => el.name.toLowerCase() === category.toLowerCase())
+            if (!selectedCategory) {
+                errorPopup.addError(new CustomError(CUSTOM_ERRORS_CODES.SPECIFED_WORK_CATEGORY_NOT_EXIST).message)
+                return
+            }
+
+            const categoryId = selectedCategory.id
             
             const data = new FormData()
             data.append("image", image)
@@ -243,6 +254,9 @@ export class WorkEditor extends HTMLElement {
                 gallery.innerHTML += /*html*/`
                     <${WorkCard.baliseName} src="${result.imageUrl}" alt="${result.title}" title="${result.title}"></${WorkCard.baliseName}>
                 `
+
+                this.works.push(result)
+
                 this.setAttribute("view", "delete")
                 this.setAttribute("display", "close")
             }).catch(e => {
@@ -250,6 +264,26 @@ export class WorkEditor extends HTMLElement {
                     errorPopup.addError(e.message)
                 }
             })
+        })
+
+        const isFieldFilled = { image: false, title: false, category: false }
+
+        createNewWorkForm.addEventListener("change", (event) => {
+            if (event.target.name === "file") {
+                if (event.target.files.length > 0) {
+                    isFieldFilled.image = true
+                } else {
+                    isFieldFilled.image = false
+                }
+            }
+            isFieldFilled[event.target.name] = (event.target.value !== "")
+
+            const createWorkBtn = this.querySelector(".create-work-form-btn")
+            if (isFieldFilled.image && isFieldFilled.title && isFieldFilled.category) {
+                createWorkBtn.classList.remove("disabled")
+            } else {
+                createWorkBtn.classList.add("disabled")
+            }
         })
     }
 

@@ -7,7 +7,9 @@ const errorsConfig = {
         3: "La création d'un nouveau travail a échouée! Veuillez réessayer ultérieurement.",
         4: "La suppression d'un nouveau travail a échoué! Veuillez réessayer ultérieurement.",
         5: "L'email ou le mot de passe n'a pas le format souhaité.",
-        6: "Un des champs requis du formulaire est vide."
+        6: "Un des champs requis du formulaire est vide.",
+        7: "L'image spécifiée est trop grande (max 4Mo).",
+        8: "La catégorie spécifiée n'existe pas.",
     },
 };
 
