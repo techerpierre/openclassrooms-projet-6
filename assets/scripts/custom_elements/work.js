@@ -1,4 +1,5 @@
 import { Api } from "../api/api.js"
+import { Cookies } from "../authentication/cookies.js";
 import { CUSTOM_ERRORS_CODES, CustomError } from "../errors/custom_errors.js";
 import { File } from "./file.js"
 
@@ -144,9 +145,12 @@ export class WorkEditor extends HTMLElement {
                     (work) => /*html*/`
                             <div class="work-editor-delete-item" data-id="${work.id}">
                                 <img src="${work.imageUrl}" alt="${work.title}"/>
-                                <button>
+                                <button class="work-editor-delete-show-modal">
                                     <img src="./assets/icons/bin.png" alt="bin icon"/>
                                 </button>
+                                <div class="work-editor-delete-modal">
+                                    <button>Supprimer</button>
+                                </div>
                             </div>
                         `
                 ).join("") : "Aucune ressources"}
@@ -166,6 +170,7 @@ export class WorkEditor extends HTMLElement {
                 <img src="./assets/icons/arrow-left.png"/>
             </button>
         </div>
+        <h3>Ajouter photo</h3>
         <form id="createNewWorkForm" class="work-editor-create-content">
             <${File.baliseName} name="file"></${File.baliseName}>
             <div class="work-editor-create-fields">
@@ -196,11 +201,24 @@ export class WorkEditor extends HTMLElement {
 
         works.forEach((work, index) => {
 
-            work.querySelector("button").addEventListener("click", (e) => {
+            const deleteModal = work.querySelector(".work-editor-delete-modal")
 
+            work.querySelector(".work-editor-delete-show-modal").addEventListener("click", (e) => {
+                e.preventDefault()
+                
+                deleteModal.classList.add("show")
+            })
+
+            deleteModal.addEventListener("click", (e) => {
+                if (e.target === e.currentTarget) {
+                    deleteModal.classList.remove("show")
+                }
+            })
+
+            deleteModal.querySelector("button").addEventListener("click", (e) => {
                 e.preventDefault()
 
-                this.api.DeleteWork(work.getAttribute("data-id"), localStorage.getItem("token"))
+                this.api.DeleteWork(work.getAttribute("data-id"), Cookies.getCookie("token"))
                     .catch(e => {
                         if (e instanceof CustomError) {
                             const errorPopup = document.getElementById("errorPopup")
