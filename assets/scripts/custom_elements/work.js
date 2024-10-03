@@ -203,7 +203,8 @@ export class WorkEditor extends HTMLElement {
                         }
                     })
                 const galleryItem = document.querySelectorAll(`#gallery ${WorkCard.baliseName}`)[index]
-                galleryItem.remove()
+                if (galleryItem)
+                    galleryItem.remove()
                 work.remove()
             })
         })
@@ -220,17 +221,10 @@ export class WorkEditor extends HTMLElement {
 
         createNewWorkForm.addEventListener("submit", (e) => {
             e.preventDefault()
-
-            console.log(e.target["file"].files);
             
-            const image = e.target["file"].value;
+            const image = e.target["file"].files[0];
             const title = e.target["title"].value;
-            const category = e.target["category"].value;
-            
-            console.log("image: ", image);
-            console.log("title: ", title);
-            console.log("category: ", category);
-            
+            const category = e.target["category"].value;            
 
             if (!image || !title || !category) {
                 errorPopup.addError(new CustomError(CUSTOM_ERRORS_CODES.FIELD_MISSING_IN_WORK_CREATION_FORM).message)
@@ -244,12 +238,18 @@ export class WorkEditor extends HTMLElement {
             data.append("title", title)
             data.append("category", categoryId)
 
-            this.api.CreateWork(data, localStorage.getItem("token"))
-                .catch(e => {
-                    if (e instanceof CustomError) {
-                        errorPopup.addError(e.message)
-                    }
-                })
+            this.api.CreateWork(data, localStorage.getItem("token")).then(result => {
+                const gallery = document.querySelector("#gallery > div")
+                gallery.innerHTML += /*html*/`
+                    <${WorkCard.baliseName} src="${result.imageUrl}" alt="${result.title}" title="${result.title}"></${WorkCard.baliseName}>
+                `
+                this.setAttribute("view", "delete")
+                this.setAttribute("display", "close")
+            }).catch(e => {
+                if (e instanceof CustomError) {
+                    errorPopup.addError(e.message)
+                }
+            })
         })
     }
 

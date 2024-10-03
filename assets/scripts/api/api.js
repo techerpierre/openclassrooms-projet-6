@@ -56,7 +56,7 @@ export class Api {
             body: data
         })
 
-        if (response.status != 200)
+        if (response.status != 201)
             throw new CustomError(CUSTOM_ERRORS_CODES.WORK_CREATION_FAILED)
 
         return response.json()
