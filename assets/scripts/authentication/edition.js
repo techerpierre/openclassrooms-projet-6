@@ -1,29 +1,26 @@
+import { Cookies } from "./cookies.js"
+
 export class Edition {
 
     constructor(elements) {
         this.handleElements(elements)
-
-        window.addEventListener("storage", (event) => {
-            if (event.key == "token") {
-                this.handleElements(elements)   
-            }
-        })
     }
 
     handleElements(elements) {
         elements.forEach(({ id, defaultDisplay, displayOnEdition }) => {
-
             const domElement = document.getElementById(id)
             domElement.style.display = this.getIsDisplayed(displayOnEdition)? defaultDisplay : "none"
-
         })
     }
 
     getIsDisplayed(displayOnEdition) {
+        const token = Cookies.getCookie("token")
         let isDisplayed = false
-        if (displayOnEdition && localStorage.getItem("token"))
+        if (displayOnEdition && token) {
+            //if (payloads.exp * 1000 > Date.now())
             isDisplayed = true
-        else if (!displayOnEdition && !localStorage.getItem("token"))
+        }
+        else if (!displayOnEdition && !token)
             isDisplayed = true
         return isDisplayed
     }

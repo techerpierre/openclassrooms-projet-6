@@ -10,14 +10,7 @@ export class ErrorModal extends HTMLElement {
 
     connectedCallback() {
         this.innerHTML = /*html*/`
-            <div class="error-modal-container">
-                ${this.errors.map((message, index) => /*html*/`
-                    <div class="error-modal-element">
-                        <p data-index="${index}">${message}</p>
-                        <span class="error-modal-close-btn">x</span>
-                    </div>
-                `).join()}
-            </div>
+            <div class="error-modal-container"></div>
         `
 
         const btnCloseElement = this.querySelectorAll(".error-modal-element")
@@ -33,14 +26,24 @@ export class ErrorModal extends HTMLElement {
     }
 
     addError(message) {
-        const index = this.errors.length.valueOf();
+        const container = this.querySelector(".error-modal-container")
 
-        this.errors.push(message)
-        this.connectedCallback()
+        const newErrorToast = document.createElement("div")
+        newErrorToast.classList.add("error-modal-element")
+        newErrorToast.innerHTML = /*html*/`
+            <p>${message}</p>
+            <span class="error-modal-close-btn">x</span>
+        `
+
+        const closeBtn = newErrorToast.querySelector(".error-modal-close-btn")
+        closeBtn.addEventListener("click", () => {
+            newErrorToast.remove()
+        })
+
+        container.appendChild(newErrorToast)
 
         setTimeout(() => {
-            this.errors.pop(index)
-        this.connectedCallback()
+            newErrorToast.remove()
         }, 6000)
     }
 

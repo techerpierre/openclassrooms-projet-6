@@ -1,5 +1,5 @@
 import { Api } from "../api/api.js"
-import { CustomError } from "../errors/custom_errors.js";
+import { CUSTOM_ERRORS_CODES, CustomError } from "../errors/custom_errors.js";
 import { File } from "./file.js"
 
 export class WorkCard extends HTMLElement {
@@ -170,9 +170,9 @@ export class WorkEditor extends HTMLElement {
             <${File.baliseName} name="file"></${File.baliseName}>
             <div class="work-editor-create-fields">
                 <label htmlFor="title">Titre</label>
-                <input type="text" id="title" name="title" required/>
+                <input type="text" id="title" name="title"/>
                 <label htmlFor="category">Catégorie</label>
-                <input type="text" id="category" name="category" required/>
+                <input type="text" id="category" name="category"/>
                 <span></span>
                 <input type="submit" value="Valider"/>
             <div>
@@ -212,6 +212,7 @@ export class WorkEditor extends HTMLElement {
     setCreateEvents() {
         const switchToDeleteButton = this.querySelector("#workEditorSwitchToDeleteWork");
         const createNewWorkForm = this.querySelector("#createNewWorkForm");
+        const errorPopup = document.getElementById("errorPopup")
 
         switchToDeleteButton.addEventListener("click", () => {
             this.setAttribute("view", "delete")
@@ -226,9 +227,15 @@ export class WorkEditor extends HTMLElement {
             const title = e.target["title"].value;
             const category = e.target["category"].value;
             
+            console.log("image: ", image);
+            console.log("title: ", title);
+            console.log("category: ", category);
+            
 
-            if (!image || !title || !category)
-                throw new Error("AAAAAAhhhhh Erreeeeeeeeur !!!!!")
+            if (!image || !title || !category) {
+                errorPopup.addError(new CustomError(CUSTOM_ERRORS_CODES.FIELD_MISSING_IN_WORK_CREATION_FORM).message)
+                return
+            }
 
             const categoryId = this.categories.find(el => el.name.toLowerCase() === category.toLowerCase()).id
             
@@ -240,7 +247,6 @@ export class WorkEditor extends HTMLElement {
             this.api.CreateWork(data, localStorage.getItem("token"))
                 .catch(e => {
                     if (e instanceof CustomError) {
-                        const errorPopup = document.getElementById("errorPopup")
                         errorPopup.addError(e.message)
                     }
                 })

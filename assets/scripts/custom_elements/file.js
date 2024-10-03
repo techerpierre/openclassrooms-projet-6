@@ -59,12 +59,9 @@ export class File extends HTMLElement {
             if (file) {
                 const reader = new FileReader()
 
-                console.log(event.target.files);
-
                 reader.onload = (event) => {
                     const src = event.target.result
                     this.setContent(this.getSelectedContent(src))
-                    console.log(event.target.files);
                 }
                 
                 reader.readAsDataURL(file);

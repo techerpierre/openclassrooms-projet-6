@@ -1,5 +1,7 @@
 import { Api } from "../api/api.js"
 import { CUSTOM_ERRORS_CODES, CustomError } from "../errors/custom_errors.js"
+import { parseJwt } from "../helpers/jwt.js"
+import { Cookies } from "./cookies.js"
 
 export class Login {
     constructor(id) {
@@ -62,7 +64,6 @@ export class Login {
             return
         }
 
-        // IMPORTANT: ne pas oublier de gérer les erreurs par la suite.
         this.api.Login({ email, password }).then(result => {
             this.storeAccessToken(result.token)
             window.location.assign("../index.html")
@@ -72,13 +73,13 @@ export class Login {
         })
     }
 
-    // note: si possible, remplacer le localstorage les par cookies.
     storeAccessToken(token) {
-        localStorage.setItem("token", token)
+        const { payloads } = parseJwt(token)
+        Cookies.setCookie("token", token, { exp: payloads.exp })
     }
 
     static logout() {
-        localStorage.removeItem("token")
+        Cookies.removeCookie("token")
         window.location.assign("./pages/login.html")
     }
 }

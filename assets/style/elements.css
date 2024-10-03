@@ -133,6 +133,10 @@ filter-button[active="true"] button {
 }
 
 edition-banner div {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
     background-color: black;
     color: white;
     display: flex;
@@ -178,8 +182,20 @@ file-preview .file-preview-image {
 error-popup .error-modal-container {
     position: fixed;
     z-index: 4;
-    top: 20px;
-    right: 20px;
+    top: 0;
+    right: 0;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    max-height: 100vh;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+error-popup .error-modal-container::-webkit-scrollbar {
+    opacity: 0;
 }
 
 error-popup .error-modal-element {
@@ -190,6 +206,8 @@ error-popup .error-modal-element {
     color: white;
     font-weight: 600;
     border-radius: 5px;
+    display: flex;
+    animation: comeFromRight 0.2s linear;
 }
 
 error-popup .error-modal-close-btn {
@@ -198,6 +216,17 @@ error-popup .error-modal-close-btn {
     right: 6px;
     z-index: 5;
     cursor: pointer;
+}
+
+@keyframes comeFromRight {
+    from {
+        opacity: 0;
+        transform: translateX(50%);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
 }
 
 .no-padding {

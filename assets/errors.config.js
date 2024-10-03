@@ -6,7 +6,8 @@ const errorsConfig = {
         2: "Impossible de récupèrer les données liées aux travaux !",
         3: "La création d'un nouveau travail a échouée! Veuillez réessayer ultérieurement.",
         4: "La suppression d'un nouveau travail a échoué! Veuillez réessayer ultérieurement.",
-        5: "L'email ou le mot de passe n'a pas le format souhaité."
+        5: "L'email ou le mot de passe n'a pas le format souhaité.",
+        6: "Un des champs requis du formulaire est vide."
     },
 };
 

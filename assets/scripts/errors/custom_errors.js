@@ -7,6 +7,7 @@ export const CUSTOM_ERRORS_CODES = {
     WORK_CREATION_FAILED: 3,
     WORK_DELETION_FAILED: 4,
     INCORECT_LOGIN_CREDENTIALS_FORMAT: 5,
+    FIELD_MISSING_IN_WORK_CREATION_FORM: 6,
 }
 
 export class CustomError extends Error {
