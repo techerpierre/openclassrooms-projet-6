@@ -1,0 +1,433 @@
+/* http://meyerweb.com/eric/tools/css/reset/
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+* {
+	box-sizing: border-box;
+}
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+/** end reset css**/
+body {
+	max-width: 1140px;
+	margin:auto;
+	font-family: 'Work Sans' ;
+	font-size: 14px;
+}
+header {
+	display: flex;
+	justify-content: space-between;
+	margin: 50px 0
+}
+section {
+	margin: 50px 0
+}
+
+a {
+	text-decoration: none;
+	color: black;
+}
+
+h1{
+	display: flex;
+	flex-direction: column;
+	font-family: 'Syne';
+	font-size: 22px;
+	font-weight: 800;
+	color: #B1663C
+}
+
+h1 > span {
+	font-family: 'Work Sans';
+	font-size:10px;
+	letter-spacing: 0.1em;
+}
+
+h2{
+	font-family: 'Syne';
+	font-weight: 700;
+	font-size: 30px;
+	color: #1D6154
+}
+nav ul {
+	display: flex;
+	align-items: center;
+	list-style-type: none;
+
+}
+nav li {
+	padding: 0 10px;
+	font-size: 1.2em;
+}
+
+li:hover {
+	color: #B1663C;
+}
+
+button {
+	height: 37px;
+	border-radius: 60px;
+	font-size: 1rem;
+	font-weight: 700;
+	font-family: "Syne";
+	border: solid 1px #1D6154;
+	color: #1D6154;
+	background-color: transparent;
+}
+
+button.filled {
+	background-color: #1D6154;
+	color: white;
+}
+
+button.disabled {
+	background-color: #A7A7A7;
+	border-color: #A7A7A7;
+	color: white;
+}
+
+#introduction {
+	display: flex;
+	align-items: center;
+}
+#introduction figure {
+	flex: 1
+}
+#introduction img {
+	display: block;
+	margin: auto;
+	width: 80%;
+}
+
+#introduction article {
+	flex: 1
+}
+#introduction h2 {
+	margin-bottom: 1em;
+}
+
+#introduction p {
+	margin-bottom: 0.5em;
+}
+#portfolioTitle {
+	display: flex;
+	justify-content: center;
+}
+#portfolioTitle > div {
+	width: fit-content;
+	position: relative;
+	margin-bottom: 1em;
+}
+#portfolio h2 {
+	text-align: center;
+}
+
+#openWorkEditor {
+	position: absolute;
+	bottom: 5px;
+	right: -100px;
+	display: flex;
+	align-items: center;
+	gap: 5px;
+	cursor: pointer;
+}
+
+
+
+.filters {
+	width: 100%;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	gap: 10px;
+	margin-bottom: 30px;
+}
+
+.gallery {
+	width: 100%;
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr;
+	grid-column-gap: 20px;
+	grid-row-gap: 20px;
+}
+
+.gallery img {
+	width: 100%;
+
+}
+#contact {
+	width: 50%;
+margin: auto;
+}
+#contact > * {
+	text-align: center;
+
+}
+#contact h2{
+	margin-bottom: 20px;
+}
+#contact form {
+	text-align: left;
+	margin-top:30px;
+	display: flex;
+	flex-direction: column;
+}
+
+input {
+	height: 50px;
+	font-size: 1.2em;
+	border: none;
+	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+}
+#contact label {
+	margin: 2em 0 1em 0;
+}
+#contact textarea {
+	border: none;
+	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+}
+
+input[type="submit"]{
+	font-family: 'Syne';
+	font-weight: 700;
+	color: white;
+	background-color: #1D6154;
+	margin : 2em auto ;
+	width: 180px;
+	text-align: center;
+	border-radius: 60px ;
+}
+
+footer nav ul {
+	display: flex;
+	justify-content: flex-end;
+	margin: 2em
+}
+
+#login {
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+	gap: 20px;
+}
+
+#login h2 {
+    margin-bottom: 7px;
+}
+
+#login div {
+    display: flex;
+    flex-direction: column;
+}
+
+#login input[type="email"], #login input[type="password"] {
+    width: 379px;
+}
+
+#login a {
+    font-weight: 500;
+    text-decoration: underline;
+}
+
+#editionBanner {
+	position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    background-color: black;
+    color: white;
+    display: flex;
+    padding: 10px;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+}
+
+#workEditionModal {
+	display: flex;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: #0000004d;
+	justify-content: center;
+	align-items: center;
+}
+
+#workEditionModal > .container {
+	background-color: white;
+	border-radius: 10px;
+	width: 630px;
+}
+
+#workEditionModal .work-edition-header {
+	padding: 20px;
+	display: flex;
+	flex-direction: row-reverse;
+	justify-content: space-between;
+	align-items: center;
+}
+
+#workEditionModal .work-edition-header > button {
+	background: none;
+	border: none;
+	padding: 0;
+	cursor: pointer;
+}
+
+#workEditionModal .content {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	padding: 40px 80px;
+	padding-top: 0;
+	overflow-y: scroll;
+	width: 100%;
+}
+
+#workEditionModal .content::-webkit-scrollbar {
+	opacity: 0;
+}
+
+#deleteWorkView {
+	display: block;
+}
+
+#createWorkView {
+	display: block;
+}
+
+#deleteWorkList {
+	display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    row-gap: 10px;
+    column-gap: 20px;
+    width: 100%;
+	margin-bottom: 20px;
+}
+
+#deleteWorkList .delete-work-thumb {
+	flex: 1;
+	position: relative;
+}
+
+#deleteWorkList .delete-work-thumb img {
+	width: 100%;
+}
+
+#deleteWorkList .delete-work-thumb button {
+	position: absolute;
+    top: 5px;
+    right: 5px;
+    background-color: black;
+    border: none;
+    width: 17px;
+    height: 17px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 2px;
+	cursor: pointer;
+}
+
+#deleteWorkList .delete-work-thumb button img {
+	width: 9px;
+}
+
+.file-input {
+	width: 100%;
+	display: flex;
+	justify-content: center;
+}
+
+.file-input input {
+    visibility: hidden;
+    position: absolute;
+}
+
+.file-input .file-preview {
+	width: 100%;
+    display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 20px;
+	padding: 25px;
+	background-color: #E8F1F6;
+	color: #444444;
+}
+
+.file-input .file-preview-image {
+	height: 203px;
+}
+
+#createWorkView .content {
+	gap: 30px;
+}
+
+.input-with-label {
+	display: flex;
+    flex-direction: column;
+}
+
+#createWorkView .input-with-label {
+	width: 100%;
+}
+
+.undisplay {
+	display: none !important;
+}
+
+.no-padding {
+	padding: 0 !important;
+}
+
+#addFileButton {
+	cursor: pointer;
+}
+
