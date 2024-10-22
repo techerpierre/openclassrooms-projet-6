@@ -1,15 +1,16 @@
 import { getStoredWorks, setStoredWorks } from "./works.js";
 import { setStoredCategories } from "./categories.js";
 import { getWorks, getCategories } from "./apiCalls.js";
-import { createWorkCard, createDeleteWorkThumb, createDeleteWorkCallback } from "./helpers.js";
+import { createWorkCard, createDeleteWorkThumb, createDeleteWorkCallback, addErrorPopup } from "./helpers.js";
 
 const gallery = document.getElementById("gallery");
 const filters = document.querySelectorAll("#filters > button");
 const deleteWorkList = document.getElementById("deleteWorkList");
+const popupContainer = document.getElementById("popupContainer");
 
 getWorks().then(data => {
 
-    setStoredWorks(data)
+    setStoredWorks(data);
 
     data.forEach(element => {
 
@@ -27,14 +28,20 @@ getWorks().then(data => {
 
         const workId = deleteWorkCard.getAttribute("data-work-id");
 
-        deleteWorkCard.querySelector("button").addEventListener("click", createDeleteWorkCallback(deleteWorkCard, workId));
+        deleteWorkCard.querySelector("button").addEventListener("click", createDeleteWorkCallback(deleteWorkCard, workId, popupContainer));
 
     });
 
+}).catch(() => {
+    addErrorPopup(popupContainer, "Impossible de lister les travaux.")
+    setStoredWorks(null);
 });
 
 getCategories().then(data => {
     setStoredCategories(data);
+}).catch(() => {
+   addErrorPopup(popupContainer, "Impossible de lister les catégoties.")
+   setStoredCategories(null);
 });
 
 filters.forEach(filter => {

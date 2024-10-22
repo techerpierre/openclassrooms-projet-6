@@ -114,12 +114,41 @@ export function createEmptyFileInputPreview() {
     ];
 }
 
-export function createDeleteWorkCallback(thumb, workId) {
+export function createPopup(message, theme) {
+    return createElement("div", { class: `popup ${theme ?? "popup-blue"}` }, [
+        createElement("span", {}, message),
+    ]);
+}
+
+export function createDeleteWorkCallback(thumb, workId, popupContainer) {
     return () => {
         deleteWork(workId).then(() => {
             gallery.querySelector(`.work-card[data-work-id="${workId}"]`).remove();
             setStoredWorks((prevWorks) => prevWorks.filter(work => work.id.toString() !== workId))
             thumb.remove();
+            addSuccessPopup(popupContainer, "Un travail à été supprimé.");
+        }).catch(() => {
+            addErrorPopup(popupContainer, "Impossible de supprimer ce travail.");
         });
     }
+}
+
+export function addPopup(parent, message, theme) {
+    const popups = document.querySelectorAll(`#${parent.id} > .popup`);
+    if (popups.length > 4) {
+        popups[0].remove();
+    }
+    const popup = createPopup(message, theme);
+    parent.appendChild(popup);
+    setTimeout(() => {
+        popup.remove();
+    }, 4000);
+}
+
+export function addErrorPopup(parent, message) {
+    addPopup(parent, message, "popup-red");
+}
+
+export function addSuccessPopup(parent, message) {
+    addPopup(parent, message, "popup-green");
 }

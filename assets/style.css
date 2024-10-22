@@ -239,13 +239,19 @@ input[type="submit"]{
 	margin : 2em auto ;
 	width: 180px;
 	text-align: center;
-	border-radius: 60px ;
+	border-radius: 60px;
+	cursor: pointer;
+}
+
+input[type="submit"]:disabled {
+	background-color: #bbbbbb;
+	cursor: default;
 }
 
 footer nav ul {
 	display: flex;
 	justify-content: flex-end;
-	margin: 2em
+	margin: 2em;
 }
 
 #login {
@@ -429,5 +435,36 @@ footer nav ul {
 
 #addFileButton {
 	cursor: pointer;
+}
+
+#popupContainer {
+	position: fixed;
+	bottom: 50px;
+	right: 0;
+	padding: 20px;
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+}
+
+#popupContainer > .popup {
+	padding: 15px;
+	border-radius: 10px;
+	width: 250px;
+}
+
+.popup-blue {
+	background-color: #146edc;
+	color: #fafafa;
+}
+
+.popup-red {
+	background-color: #dc1422;
+	color: #fafafa;
+}
+
+.popup-green {
+	background-color: #32dc14;
+	color: #fafafa;
 }
 
